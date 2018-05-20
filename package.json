@@ -1,6 +1,6 @@
 {
   "name": "wepy-com-paper-flash",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Wepy paper UI flash component",
   "main": "flash.wpy",
   "scripts": {
