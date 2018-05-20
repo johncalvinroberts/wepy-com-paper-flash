@@ -1,0 +1,58 @@
+<style lang="css">
+  .flash--sheet{
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 30rpx;
+    background-color: #fff;
+    color: #000;
+    text-align:center;
+    box-shadow:0 10px 30px 0 rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    z-index:99;
+    box-sizing: border-box;
+  }
+</style>
+<template>
+  <view class="flash--sheet"
+        @tap="hide"
+        id="flashsheet"
+        style="transform:{{isOpen ? 'translate3d(0, 0, 0)' : 'translate3d(0, -200%, 0)'}};">
+    {{currentMessage}}
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+  export default class Flash extends wepy.component {
+    props = {
+      lengthoftime: {
+        type: Number,
+        default: 2000
+      }
+    }
+    data = {
+      currentMessage: '',
+      isOpen: false
+    }
+    props = {}
+    methods = {
+      showMessage (message) {
+        this.isOpen = true
+        this.currentMessage = message
+        this.$apply()
+        setTimeout(() => {
+          this.isOpen = false
+          this.$apply()
+        }, 2000)
+      },
+      hide ({target, currentTarget}) {
+        if (target.id === currentTarget.id) {
+          this.isOpen = false
+          this.$apply()
+        }
+      }
+    }
+  }
+</script>
